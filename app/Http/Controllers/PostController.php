@@ -22,9 +22,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $this->authorize('viewAny');
         $user = Auth::user();
-        $posts = Post::all();
+        $posts = $user->posts()->paginate(10);
+
         if($user->role == 'admin'){
             return view('admin.posts.view', compact('posts'));
         }else{
@@ -68,7 +68,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $this->authorize('view', $post);
         $user = Auth::user();
         if($user->role == 'admin'){
             return view('admin.posts.show', compact('post'));

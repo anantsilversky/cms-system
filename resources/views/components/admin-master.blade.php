@@ -11,18 +11,26 @@
 
     <title>SB Admin 2 - Dashboard</title>
 
-    <!-- Custom fonts for this template-->
+    
+    
+    
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+    
     <!-- Custom styles for this template-->
     <link href="{{asset('build/assets/sb-admin-2.css')}}" rel="stylesheet">
-
+    
+    <!-- Custom styles for this template -->
     <link href="{{asset('build/assets/app-bbd6a014.css')}}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    
 
 </head>
 
@@ -35,7 +43,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -256,7 +264,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" type="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
                                 <img class="img-profile rounded-circle"
@@ -288,7 +296,7 @@
                                 </form>
                             </div>
                         </li>
-
+                        
                     </ul>
 
                 </nav>
@@ -350,17 +358,6 @@
             </div>
         </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-        <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="{{asset('build/assets/sb-admin-2.js')}}"></script>
-
-        @yield('scripts')
 </body>
 
 </html>

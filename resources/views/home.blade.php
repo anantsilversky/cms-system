@@ -33,8 +33,9 @@
             </li>
         </ul>
     
-    @endif
+    @else
     <h3 class="my-4">Currently there are no posts ! </h3>
+    @endif
     @endsection
 
 

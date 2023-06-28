@@ -19,7 +19,7 @@ class PostPolicy
     public function viewAny(User $user)
     {
         //
-        return $user->id;
+        
     }
 
     /**

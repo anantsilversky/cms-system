@@ -2,7 +2,7 @@
     @section('content')
     <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
 
-    <h1 class="mb-0 text-gray-800 text-center">Posts</h1>
+    <h1 class="mb-0 text-center">Posts</h1>
     <div style="text-align: center;">
       <cite>
         <small>
@@ -56,9 +56,10 @@
                 <form method="POST" onsubmit="return confirm('Are you sure want to delete?')" action="{{route('posts.destroy', $post)}}">
                   @method('DELETE')
                   @csrf
-                  <button style="width: 73px" class="btn btn-outline-danger">Delete</button>
+                  <button style="width: 78px" class="btn btn-outline-danger">Delete</button>
                 </form>
                 @endcan
+
               </td>
             </tr>
           @endforeach
@@ -69,14 +70,10 @@
         </table>
       </div>
     </div>
-    @endsection
-    @section('scripts')
-    
-    <!-- Page level plugins -->
-    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{asset('build/assets/datatables-demo.js')}}"></script>
+    <div class="d-flex">
+      <div class="mx-auto">
+        {{$posts->links()}}
+      </div>
+    </div>
     @endsection
 </x-admin-master>

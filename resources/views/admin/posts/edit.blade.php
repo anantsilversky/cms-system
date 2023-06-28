@@ -2,7 +2,7 @@
     @section('content')
     <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
 
-    <h1 class="mb-0 text-gray-800 text-center">Update</h1>
+    <h1 class="mb-0 text-center">Update</h1>
     <br>
     <p class=" text-center text-danger">* Required Fields</p>
     <br>
