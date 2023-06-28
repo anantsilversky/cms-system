@@ -22,8 +22,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        // $this->authorize('viewAny');
         $user = Auth::user();
-        $posts = $user->posts;
+        $posts = Post::all();
         if($user->role == 'admin'){
             return view('admin.posts.view', compact('posts'));
         }else{
@@ -56,7 +57,7 @@ class PostController extends Controller
             'description' => $request->description,
             'image' => $image
         ]);
-        return redirect()->back()->with('success', 'Post created successfully !');  
+        return redirect(route('posts.index'))->with('success', 'Post created successfully !');  
     }
 
     /**
@@ -67,7 +68,13 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('blog-post', compact('post'));
+        $this->authorize('view', $post);
+        $user = Auth::user();
+        if($user->role == 'admin'){
+            return view('admin.posts.show', compact('post'));
+        }else{
+            return view('blog-post', compact('post')); 
+        }
     }
 
     /**
@@ -78,7 +85,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        
+        $this->authorize('view', $post);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -88,9 +96,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        
+        $this->authorize('update', $post);
+        $image = basename($request->image->store('public/images'));
+        $post->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $image
+        ]);
+        return redirect(route('posts.index'))->with('success', 'Post updated successfully !'); 
     }
 
     /**
@@ -99,9 +114,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete', $post);
+        $post->delete();
+        return back()->with('deleted', 'Post deleted successfully !');
     }
 
     
