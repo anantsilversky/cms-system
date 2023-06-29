@@ -10,10 +10,9 @@
 
     <title>Blog Home - Start Bootstrap Template</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
     <link href="{{asset('build/assets/app-bbd6a014.css')}}" rel="stylesheet">
+
+    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
     <link href="{{asset('build/assets/blog-home.css')}}" rel="stylesheet">
@@ -35,13 +34,25 @@
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            @guest
+                @if (Route::has('login'))
+                <a class="navbar-brand" href="{{ route('login') }}">
+                    <span style="font-size: 80%">Login</span>
+                </a>
+                @endif
+
+                @if (Route::has('register'))
+                <a class="navbar-brand" href="{{ route('register') }}">
+                    <span style="font-size: 80%">Register</span>
+                </a>
+                @endif
+            @else
+                <a class="navbar-brand" href="{{route('users.show', [Auth::user()])}}">
+                    <span style="font-size: 80%">({{Auth::user()->name}})</span>
+                </a>
+            @endguest
             <div class="collapse navbar-collapse justify-content-end " id="navbarResponsive">
-                <ul class="navbar-nav  ">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('users.show', [Auth::user()])}}">
-                            <span class="sr-only">({{Auth::user()->name}})</span>
-                        </a>
-                    </li>
+                <ul class="navbar-nav">
                     @if(Auth::check())
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="post"
@@ -50,20 +61,6 @@
                             <button type="submit" class="nav-link">Logout</button>
                         </form>
                     </li>
-
-                    @else
-                    @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                    @endif
-
                     @endif
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -167,9 +164,7 @@
         <!-- /.container -->
     </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    
 
 </body>
 

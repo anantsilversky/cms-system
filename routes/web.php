@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +24,11 @@ Auth::routes();
 Route::get('/user/{user}', [HomeController::class, 'show'])->name('users.show');
 
 
-Route::get('/', [HomeController::class, 'index'])->middleware('loginAdmin')->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::resource('posts', PostController::class);
 
-Route::middleware(['auth', 'isAdmin'])->group(function(){
+Route::middleware('auth')->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('users', UserController::class);
 });
-
-// Route::resource('comments', CommentController::class);

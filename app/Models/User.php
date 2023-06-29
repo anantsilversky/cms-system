@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -23,6 +26,7 @@ class User extends Authenticatable
         'username',
         'age',
         'password',
+        'profile_image'
     ];
 
     /**
@@ -50,5 +54,24 @@ class User extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany(Role::class);
+    }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function hasAccess($role_name){
+        foreach (Auth::user()->roles as $role) {
+            if($role->name == $role_name){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function password():Attribute{
+        return Attribute::make(
+            set:fn(string $val) => Hash::make($val)
+        );
     }
 }

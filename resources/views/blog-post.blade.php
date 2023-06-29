@@ -2,22 +2,23 @@
 
     @section('content')
     <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
-    <h1 class="mt-4">{{$post->title}}</h1>
-
+    <h1 class="mt-4">{{$post->title}} <i style="font-size: 40%" class="fas fa-fw fa-pen"></i><a class="text-decoration-none" style="font-size: 50%" href="{{route('posts.edit', $post)}}">Edit</a><i style="font-size: 40%; margin-left:2%" class="fas fa-fw fa-trash"></i><a style="font-size: 50%" class="text-decoration-none" onclick="event.preventDefault(); document.getElementById('delete').submit();" href="{{route('posts.destroy', $post)}}">Delete</a>
+    </h1>
+    <form id="delete" action="{{route('posts.destroy', $post)}}" method="POST">
+        @method('DELETE')
+        @csrf
+    </form>
     <!-- Author -->
     <p class="lead">
         by
-        <a href="{{route('users.show', [Auth::user()])}}">{{Auth::user()->name}}</a>
+        <a class="text-decoration-none" href="{{route('users.show', [Auth::user()])}}">{{Auth::user()->name}}</a>
     </p>
-
-    <hr>
-
     <!-- Date/Time -->
     <p>Posted on {{$post->created_at->diffForHumans()}}</p>
 
 
     <!-- Preview Image -->
-    <img class="img-fluid rounded" src="{{$post->image}}" alt="">
+    <img class="img-fluid rounded" src="{{asset('storage/images/'.$post->image)}}" alt="">
 
 
     <!-- Post Content -->

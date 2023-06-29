@@ -44,7 +44,7 @@
               <td>{{$post->id}}</td>
               <td><a href="{{route('posts.show', $post)}}">{{$post->title}}</a></td>
               <td>{{$post->description}}</td>
-              <td><img src="{{'storage/images/'.$post->image}}" width="100%" height="100"></td>
+              <td><img src="{{asset('storage/images/'.$post->image)}}" width="100%" height="100"></td>
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
               <td>

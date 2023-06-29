@@ -25,11 +25,8 @@ class PostController extends Controller
         $user = Auth::user();
         $posts = $user->posts()->paginate(10);
 
-        if($user->role == 'admin'){
-            return view('admin.posts.view', compact('posts'));
-        }else{
-            return view('home', compact('posts')); 
-        }
+        return view('home', compact('posts'));
+        
     }
 
     /**
@@ -117,7 +114,7 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
         $post->delete();
-        return back()->with('deleted', 'Post deleted successfully !');
+        return redirect(route('posts.index'))->with('deleted', 'Post deleted successfully !');
     }
 
     
