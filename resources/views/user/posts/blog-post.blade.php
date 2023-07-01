@@ -10,15 +10,14 @@
     </form>
     <!-- Author -->
     <p class="lead">
-        by
-        <a class="text-decoration-none" href="{{route('users.show', [Auth::user()])}}">{{Auth::user()->name}}</a>
+        by {{$post->user->name}}    
     </p>
     <!-- Date/Time -->
     <p>Posted on {{$post->created_at->diffForHumans()}}</p>
 
 
     <!-- Preview Image -->
-    <img class="img-fluid rounded" src="{{asset('storage/images/'.$post->image)}}" alt="">
+    <img  src="{{asset('storage/images/'.$post->image)}}" height="200" width="200" alt="Image Unavailable">
 
 
     <!-- Post Content -->

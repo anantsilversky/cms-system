@@ -69,6 +69,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('view', $user);
         if(Auth::user()->hasAccess('Admin')){
             return view('admin.profile.edit', compact('user'));
         }

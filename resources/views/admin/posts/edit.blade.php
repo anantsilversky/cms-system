@@ -34,7 +34,7 @@
             <input type="file" name="image" value="{{ $post->image }}" class="form-control @error('image') is-invalid @enderror" Required>
         </div>
         <div class="text-center">
-            <img src="{{asset('storage/images/'.$post->image)}}"  width="100" height="100">
+            <img src="{{asset('storage/images/'.$post->image)}}" alt="Image Unavailable"  width="100" height="100">
         </div>
         @error('image')
         <div class=" form-group mx-auto " style="width:500px">

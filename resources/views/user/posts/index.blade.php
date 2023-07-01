@@ -1,7 +1,7 @@
 <x-home-master>
     @section('content')
     <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
-    <h1 class="my-4"> Posts</h1>
+    <h1 class="my-4">Your Feed</h1>
     @if(session()->exists('success'))
     <strong class="text-success text-center">{{session('success')}}</strong>
     <br><br>
@@ -15,7 +15,7 @@
         @foreach($posts as $post)
 
         <div class="card mb-4">
-            <img class="card-img-top" src="{{asset('storage/images/'.$post->image)}}" alt="Card image cap">
+            <img src="{{asset('storage/images/'.$post->image)}}" height="200" width="200" alt="Image Unavailable">
             <div class="card-body">
                 <h2 class="card-title">{{$post->title}}</h2>
                 <p class="card-text">{{$post->description}}</p>

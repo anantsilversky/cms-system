@@ -62,6 +62,12 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+
+                                @if (Route::has('guest'))
+                                <div class="d-flex justify-content-end">
+                                    <a class="text-decoration-none text-reset" href="{{route('guest')}}">Skip for now</a>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </form>

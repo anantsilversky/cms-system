@@ -115,7 +115,7 @@
                             <div class="col-lg-6">
                                 <ul class="list-unstyled mb-0">
                                     <li>
-                                        <a href="{{route('posts.index')}}">View Posts</a>
+                                        <a href="{{route('posts.index')}}">View your Posts</a>
                                     </li>
                                     <li>
                                         <a href="{{route('posts.create')}}">Create Post</a>
@@ -128,7 +128,11 @@
                             <div class="col-lg-6">
                                 <ul class="list-unstyled mb-0">
                                     <li>
+                                        @if(Auth::check())
                                         <a href="{{route('users.show', [Auth::user()])}}">View Profile</a>
+                                        @else
+                                        <a href="{{route('login')}}">View Profile</a>
+                                        @endif
                                     </li>
                                     <li>
                                         <a href="#">Your Activity</a>

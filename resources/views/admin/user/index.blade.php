@@ -37,7 +37,7 @@
               <td>{{$user->username}}</td>
               <td>{{$user->email}}</td>
               <td>{{$user->age}}</td>
-              <td><img src="{{asset('storage/images/'.$user->profile_image)}}" width="100%" height="100"></td>
+              <td><img src="{{asset('storage/images/'.$user->profile_image)}}" alt="Image unavailable" width="100%" height="100"></td>
               <td>
                 <form method="POST" onsubmit="return confirm('Are you sure want to delete?')" action="{{route('users.destroy', $user)}}">
                     @method('DELETE')

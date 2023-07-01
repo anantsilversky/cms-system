@@ -27,7 +27,7 @@
                     <h4>Password : <span style="font-size: 80%; margin-left:3%">********</span></h4>
                 </div>
                 <div class="card" style="width: 40%; padding:4%; border: none; ">
-                    <img src="{{asset('storage/images/'.$user->profile_image)}}">
+                    <img alt="Image unavailable" src="{{asset('storage/images/'.$user->profile_image)}}">
                 </div>
             </div>
         </div>

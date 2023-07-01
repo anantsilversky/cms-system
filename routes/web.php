@@ -28,8 +28,10 @@ Route::middleware('auth')->group(function(){
     Route::resource('users', UserController::class);
 });
 
-Route::middleware(['auth', 'isAdmin'])->group(function(){
+Route::middleware(['isAdmin', 'auth'])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
 });
+
+Route::get('/guest', [HomeController::class, 'index'])->name('guest');

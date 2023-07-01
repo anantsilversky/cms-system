@@ -32,7 +32,7 @@
                         <h4>Password : <span style="font-size: 80%; margin-left:3%">********</span></h4>
                     </div>
                     <div class="card" style="padding:4%; border: none; ">
-                        <img width="400" src="{{asset('storage/images/'.$user->profile_image)}}">
+                        <img width="400" alt="Image unavailable" src="{{asset('storage/images/'.$user->profile_image)}}">
                     </div>
                 </div>
             </div>

@@ -82,7 +82,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        
+        $this->authorize('view', $post);
         $user = Auth::user();
         if($user->hasAccess('Admin')){
             return view('admin.posts.edit', compact('post'));

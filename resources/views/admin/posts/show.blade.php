@@ -20,7 +20,7 @@
         <p>Posted {{$post->created_at->diffForHumans()}}</p>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="{{asset('storage/images/'.$post->image)}}" width="200" height="200">
+        <img src="{{asset('storage/images/'.$post->image)}}" alt="Image unavailable" width="200" height="200">
 
         <!-- Post Content -->
         <p class="lead">{{$post->description}}</p>

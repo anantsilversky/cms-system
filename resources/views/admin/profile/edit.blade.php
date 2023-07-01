@@ -9,7 +9,7 @@
             <h3 class="text-center" style="margin-top: 1%">Edit Details </h3>
             <div class="d-flex justify-content-end">
                 <label for="image" >
-                    <img class="img-profile rounded-circle" height="90" src="{{asset('storage/images/'.$user->profile_image)}}">
+                    <img class="img-profile rounded-circle" height="90" src="{{asset('storage/images/'.$user->profile_image)}}" alt="Image unavailable">
                 </label>
             </div>
             <input type="file" id="image" name="image" style="display: none;">
