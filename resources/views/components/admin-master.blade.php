@@ -29,8 +29,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    
 
 </head>
 
@@ -43,7 +43,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('users.show', Auth::user())}}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -69,7 +69,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-upload"></i>
                     <span>Posts</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" data-parent="#accordionSidebar">
@@ -90,12 +90,42 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUsers"
                     aria-expanded="true" aria-controls="collapseUsers">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>Users</span>
                 </a>
                 <div id="collapseUsers" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('users.index')}}">View</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                Authorizations
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseRoles"
+                    aria-expanded="true" aria-controls="    collapseRoles">
+                    <i class="fas fa-fw fa-check-circle"></i>
+                    <span>Roles</span>
+                </a>
+                <div id="collapseRoles" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('roles.index')}}">View</a>
+                        <a class="collapse-item" href="{{route('roles.create')}}">Create</a>
+                    </div>
+                </div>
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePermissions"
+                    aria-expanded="true" aria-controls="collapsePermissions">
+                    <i class="fas fa-fw fa-lock"></i>
+                    <span>Permissions</span>
+                </a>
+                <div id="collapsePermissions" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('permissions.index')}}">View</a>
+                        <a class="collapse-item" href="{{route('permissions.create')}}">Create</a>
                     </div>
                 </div>
             </li>

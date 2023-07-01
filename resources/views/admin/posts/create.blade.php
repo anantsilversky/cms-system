@@ -4,7 +4,7 @@
 
     <h1 class="mb-0 text-center">Create</h1>
     <br>
-    <p class=" text-center text-danger">* Required Fields</p>
+    <p class=" text-center text-danger"><i class="fas fa-fw fa-asterisk"></i> Required Fields</p>
     <br>
     <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
         @csrf

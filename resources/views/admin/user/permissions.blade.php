@@ -1,7 +1,7 @@
 <x-admin-master>
     @section('content')
         <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
-        <h1 class="text-center">Roles</h1>
+        <h1 class="text-center">Permissions</h1>
         <div class="text-center">
             <cite>For {{$user->name}}</cite>
         </div>
@@ -15,7 +15,7 @@
             <strong class="text-danger">{{session('deleted')}}</strong>
             </div>
         @endif
-        @if(count($roles) > 0)
+        @if(count($permissions) > 0)
             <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -29,25 +29,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($roles as $role)
+                @foreach($permissions as $permission)
                     <tr>
                     <td>
                         <input type="checkbox" 
-                        @if($user->roles->contains($role))
+                        @if($user->permissions->contains($permission))
                         checked
                         @endif>
-                    <td>{{$role->id}}</td>
-                    <td>{{$role->name}}</td>
-                    <td>{{$role->slug}}</td>
+                    <td>{{$permission->id}}</td>
+                    <td>{{$permission->name}}</td>
+                    <td>{{$permission->slug}}</td>
                     <td>
-                        <form action="{{route('roles.update', $role)}}" method="POST">
+                        <form action="{{route('permissions.update', $permission)}}" method="POST">
                             @csrf
                             @method('PUT')
-                            <input type="hidden" value="{{$user->id}}" name="userid">
-                            <input type="submit" name="attach" @if ($user->roles->contains($role))
+                            <input type="hidden" value="{{$_REQUEST['userid']}}" name="userid">
+                            <input type="submit" name="attach" @if ($user->permissions->contains($permission))
                             disabled
                             @endif value="Attach" class="btn btn-primary">
-                            <input type="submit" name="dettach" @if (!$user->roles->contains($role))
+                            <input type="submit" name="dettach" @if (!$user->permissions->contains($permission))
                             disabled
                             @endif
                              value="Detach" class="btn btn-danger">
@@ -65,13 +65,13 @@
                 </a>
             </div>
         @else    
-        <h3>There are no roles currently</h3>    
+        <h3>There are no permissions currently</h3>    
         @endif    
         </div>
         </div>
         <div class="d-flex">
         <div class="mx-auto">
-            {{$roles->links()}}
+            {{$permissions->links()}}
         </div>
         </div>
     @endsection

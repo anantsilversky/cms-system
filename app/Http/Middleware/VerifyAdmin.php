@@ -19,8 +19,8 @@ class VerifyAdmin
     {
         $user = Auth::user();
         if($user->hasAccess('Admin')){
-            return redirect(route('admin.index'));
+            return $next($request);
         }
-        return $next($request);
+        return abort(403);
     }
 }

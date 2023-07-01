@@ -48,6 +48,10 @@
                 <a href="{{route('roles.index')}}?userid={{$user->id}}">
                    <button class="btn btn-outline-primary" style="width:57%">Roles</button>
                 </a>
+                <br><br>
+                <a href="{{route('permissions.index')}}?userid={{$user->id}}">
+                   <button class="btn btn-outline-primary" style="width:78%">Permissions</button>
+                </a>
               </td>
             </tr>
           @endforeach

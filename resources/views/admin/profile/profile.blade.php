@@ -1,5 +1,6 @@
 <x-admin-master>
     @section('content')
+        <a href="{{url()->previous()}}" class="text-decoration-none text-reset">&larr; Back</a>
         <div class="card mb-8">
             <h3 class="text-center" style="margin-top: 5%">
             <i style="font-size: 60%; margin-right:1%;" class="fas fa-fw fa-lock"></i>

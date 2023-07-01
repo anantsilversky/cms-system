@@ -16,12 +16,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $user = User::find($_REQUEST['userid']);
         $roles = Role::paginate(10);
-        if(Auth::user()->hasAccess('Admin')){
+        if(isset($_REQUEST['userid'])){
+            $user = User::find($_REQUEST['userid']);
             return view('admin.user.roles', compact('roles', 'user'));
         }
-        return abort(403);
+        return view('admin.roles.view', compact('roles'));
     }
 
     /**
@@ -31,7 +31,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
@@ -42,7 +42,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $inputs = $request->validate([
+            'name' => ['required'],
+            'slug' => ['required'],
+        ]);
+        Role::create($inputs);
+        return redirect(route('roles.index'))->with('success', 'Role created successfully !');
     }
 
     /**
@@ -62,9 +67,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
@@ -76,18 +81,24 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $user = User::find($_REQUEST['userid']);
-        if(Auth::user()->hasAccess('Admin')){
+        if(isset($_REQUEST['userid'])){
+            $user = User::find($_REQUEST['userid']);
             if($request->has('attach')){
                 $user->roles()->attach($role);
-                return back();
+                return back()->with('success', 'Role Attached successfully !');
             }
             if($request->has('dettach')){
                 $user->roles()->detach($role);
-                return back();
+                return back()->with('deleted', 'Role Detached    successfully !');
             }
+        }else{
+            $inputs = $request->validate([
+                'name' => 'required',
+                'slug' => 'required'
+            ]);
+            $role->update($inputs);
+            return redirect(route('roles.index'))->with('success', 'Role Updated successfully !');
         }
-        return abort(403);
     }
 
     /**
@@ -96,8 +107,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return back()->with('deleted', 'Role deleted successfully !');
     }
 }
