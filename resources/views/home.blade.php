@@ -3,7 +3,8 @@
     <h1 style="margin-top: 10%">Welcome, @if(Auth::check())
         {{Auth::user()->name}} !
         @else
-        Guest !
+        Guest
+        <p style="font-size: 40%">Please Login or register to continue further !</p>
         @endif</h1>
     <br><br>
     @if(count($posts) > 0)
