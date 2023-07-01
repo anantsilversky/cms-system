@@ -3,13 +3,6 @@
     <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
 
     <h1 class="mb-0 text-center">Posts</h1>
-    <div style="text-align: center;">
-      <cite>
-        <small>
-          <a class="text-decoration-none" href="{{ route('users.show', [Auth::user()]) }}">by {{ Auth::user()->name }}</a>
-        </small>
-      </cite>
-    </div>
     <br>
     @if(session('success'))
       <div class=" form-group text-center">
@@ -29,8 +22,9 @@
           <thead>
             <tr>
               <th style="width: 5%">Id</th>
-              <th style="width: 15%">Title</th>
-              <th style="width: 40%">Description</th>
+              <th style="width:10%">Owner</th>
+              <th style="width: 10%">Title</th>
+              <th style="width: 35%">Description</th>
               <th style="width: 10%">Image</th>
               <th>Posted</th>
               <th>Updated</th>
@@ -42,24 +36,22 @@
           @foreach($posts as $post)
             <tr>
               <td>{{$post->id}}</td>
+              <td>{{$post->user->name}}</td>
               <td><a href="{{route('posts.show', $post)}}">{{$post->title}}</a></td>
               <td>{{$post->description}}</td>
               <td><img src="{{asset('storage/images/'.$post->image)}}" width="100%" height="100"></td>
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
               <td>
-                @can('view', $post)
+                @can('update', $post)
                 <a href="{{route('posts.edit', $post)}}"><button class="btn btn-outline-success">Update</button></a>
-                @endcan
                 <br><br>
-                @can('delete', $post)
+                @endcan
                 <form method="POST" onsubmit="return confirm('Are you sure want to delete?')" action="{{route('posts.destroy', $post)}}">
                   @method('DELETE')
                   @csrf
                   <button style="width: 78px" class="btn btn-outline-danger">Delete</button>
                 </form>
-                @endcan
-
               </td>
             </tr>
           @endforeach

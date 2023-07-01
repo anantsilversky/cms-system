@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,7 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::user()->hasAccess('Admin')){
+            $users = User::where('id', '<>',  Auth::user()->id)->paginate(10);
+            return view('admin.user.index', compact('users'));
+        }   
+        return abort(403);
     }
 
     /**
@@ -47,9 +52,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
-
-        return view('user.profile', compact('user'));
+        if(Auth::user()->hasAccess('Admin')){
+            return view('admin.profile.profile', compact('user'));
+        }
+        elseif(Auth::user()->id == $user->id){
+            return view('user.profile', compact('user'));
+        }
+        return abort(403);
     }
 
     /**
@@ -60,6 +69,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if(Auth::user()->hasAccess('Admin')){
+            return view('admin.profile.edit', compact('user'));
+        }
         return view('user.edit', compact('user'));
     }
 
@@ -72,6 +84,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $image = basename($request->image->store('public/images'));
         $user->update([
             'name' => $request->name,
@@ -90,8 +103,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $this->authorize('delete', $user);
+        $user->delete();
+        return redirect(route('users.index'))->with('deleted', 'User deleted successfully !');
     }
 }

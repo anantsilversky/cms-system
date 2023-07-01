@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-
-    
-    public function __construct(){
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -23,10 +18,12 @@ class PostController extends Controller
     public function index()
     {
         $user = Auth::user();
+        if($user->hasAccess('Admin')){
+            $posts = Post::paginate(10);
+            return view('admin.posts.view', compact('posts'));
+        }
         $posts = $user->posts()->paginate(10);
-
-        return view('home', compact('posts'));
-        
+        return view('user.posts.index', compact('posts'));
     }
 
     /**
@@ -36,7 +33,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $user = Auth::user();
+        if($user->hasAccess('Admin')){
+            return view('admin.posts.create');
+        }
+        return view('user.posts.create');
     }
 
     /**
@@ -66,11 +67,11 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $user = Auth::user();
-        if($user->role == 'admin'){
+        if($user->hasAccess('Admin')){
             return view('admin.posts.show', compact('post'));
-        }else{
-            return view('blog-post', compact('post')); 
         }
+        return view('user.posts.blog-post', compact('post')); 
+
     }
 
     /**
@@ -81,8 +82,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $this->authorize('view', $post);
-        return view('admin.posts.edit', compact('post'));
+        
+        $user = Auth::user();
+        if($user->hasAccess('Admin')){
+            return view('admin.posts.edit', compact('post'));
+        }   
+        return view('user.posts.edit', compact('post'));
     }
 
     /**

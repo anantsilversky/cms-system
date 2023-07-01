@@ -3,7 +3,13 @@
     <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
 
     <div class="card mb-8" style="margin-top: 8%">
-        <h3 class="text-center" style="margin-top: 5%">Account Details <i style="font-size: 50%; margin-left:1%" class="fas fa-fw fa-pen"></i><a class="text-decoration-none" style="font-size: 70%" href="{{route('users.edit', $user)}}">Edit</a></h3>
+        <h3 class="text-center" style="margin-top: 5%">
+        <i style="font-size: 60%; margin-right:1%;" class="fas fa-fw fa-lock"></i>
+        Account Details 
+        <i style="font-size: 50%; margin-left:1%" class="fas fa-fw fa-pen"></i>
+        <a class="text-decoration-none" style="font-size: 70%" href="{{route('users.edit', $user)}}">Edit</a>
+        </h3>
+        
         <div class="text-center">
             <strong class="text-success">{{session('success')}}</strong>
         </div>

@@ -1,40 +1,5 @@
 <x-home-master>
-
-
     @section('content')
-    <h1 class="my-4"> Posts</h1>
-    @if(session()->exists('deleted'))
-    <strong class="text-danger text-center">{{session('deleted')}}</strong>
-    <br><br>
-    @endif
-    <!-- Blog Post -->
-    @if(count($posts) > 0)
-        @foreach($posts as $post)
-
-        <div class="card mb-4">
-            <img class="card-img-top" src="{{asset('storage/images/'.$post->image)}}" alt="Card image cap">
-            <div class="card-body">
-                <h2 class="card-title">{{$post->title}}</h2>
-                <p class="card-text">{{$post->description}}</p>
-                <a href="{{route('posts.show', [$post])}}" class="btn btn-primary">Read More &rarr;</a>
-            </div>
-            <div class="card-footer text-muted">
-                Posted on {{$post->created_at->diffForHumans()}}
-            </div>
-        </div>
-
-        @endforeach
-    
-    @else
-    <h3 class="my-4">Currently there are no posts ! </h3>
-    @endif
-
-    <div class="d-flex">
-        <div class="mx-auto">
-            {{$posts->links()}}
-        </div>
-    </div>
+    <h1 style="margin-top: 10%">Welcome, {{Auth::user()->name}} !</h1>
     @endsection
-
-
 </x-home-master>

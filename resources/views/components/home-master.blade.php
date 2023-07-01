@@ -46,10 +46,6 @@
                     <span style="font-size: 80%">Register</span>
                 </a>
                 @endif
-            @else
-                <a class="navbar-brand" href="{{route('users.show', [Auth::user()])}}">
-                    <span style="font-size: 80%">({{Auth::user()->name}})</span>
-                </a>
             @endguest
             <div class="collapse navbar-collapse justify-content-end " id="navbarResponsive">
                 <ul class="navbar-nav">
@@ -104,6 +100,13 @@
                     </div>
                 </div>
 
+                <div class="card my-4" style="margin-left:40px">
+                    <h5 class="card-header">Bio</h5>
+                    <div class="card-body">
+                        You can put anything you want inside of these side widgets. They are easy to use, and feature
+                        the new Bootstrap 4 card containers!
+                    </div>
+                </div>
                 <!-- Categories Widget -->
                 <div class="card my-4" style="margin-left:40px">
                     <h5 class="card-header">Categories</h5>
@@ -112,26 +115,26 @@
                             <div class="col-lg-6">
                                 <ul class="list-unstyled mb-0">
                                     <li>
-                                        <a href="#">Web Design</a>
+                                        <a href="{{route('posts.index')}}">View Posts</a>
                                     </li>
                                     <li>
-                                        <a href="#">HTML</a>
+                                        <a href="{{route('posts.create')}}">Create Post</a>
                                     </li>
                                     <li>
-                                        <a href="#">Freebies</a>
+                                        <a href="#">Notifications</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-lg-6">
                                 <ul class="list-unstyled mb-0">
                                     <li>
-                                        <a href="#">JavaScript</a>
+                                        <a href="{{route('users.show', [Auth::user()])}}">View Profile</a>
                                     </li>
                                     <li>
-                                        <a href="#">CSS</a>
+                                        <a href="#">Your Activity</a>
                                     </li>
                                     <li>
-                                        <a href="#">Tutorials</a>
+                                        <a href="#">Friends</a>
                                     </li>
                                 </ul>
                             </div>
@@ -140,13 +143,6 @@
                 </div>
 
                 <!-- Side Widget -->
-                <div class="card my-4" style="margin-left:40px">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                        You can put anything you want inside of these side widgets. They are easy to use, and feature
-                        the new Bootstrap 4 card containers!
-                    </div>
-                </div>
 
             </div>
 
@@ -157,7 +153,7 @@
     <!-- /.container -->
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark mt-auto">
+    <footer class="py-3 bg-dark mt-auto">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
         </div>

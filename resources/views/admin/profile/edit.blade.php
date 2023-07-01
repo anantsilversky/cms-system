@@ -1,12 +1,12 @@
-<x-home-master>
+<x-admin-master>
     @section('content')
     <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
-
+    <br><br>
     <form action="{{route('users.update', $user)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('put')
-        <div class="card mb-4 " style="margin-top: 8%; padding-left:4%; padding-right:4%;">
-            <h3 class="text-center" style="margin-top: 5%;">Edit Details </h3>
+        <div class="card mb-4 " style=" padding-left:4%; padding-right:4%;">
+            <h3 class="text-center" style="margin-top: 1%">Edit Details </h3>
             <div class="d-flex justify-content-end">
                 <label for="image" >
                     <img class="img-profile rounded-circle" height="90" src="{{asset('storage/images/'.$user->profile_image)}}">
@@ -66,4 +66,4 @@
         </div>
     </form>
     @endsection
-</x-home-master>
+</x-admin-master>

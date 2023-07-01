@@ -3,12 +3,17 @@
     @section('content')
 
         <a class="text-decoration-none text-reset" href="{{url()->previous()}}">&larr; Back </a>
-        <h1 class="mt-4">{{$post->title}} <i style="font-size: 40%" class="fas fa-fw fa-pen"></i><span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-size: 50%"><a class="text-decoration-none" href="{{route('posts.edit', $post)}}">Edit</a></span></h1>
+        <h1 class="mt-4">{{$post->title}} <i style="font-size: 40%" class="fas fa-fw fa-pen"></i><a class="text-decoration-none" style="font-size: 50%" href="{{route('posts.edit', $post)}}">Edit</a><i style="font-size: 40%; margin-left:1%" class="fas fa-fw fa-trash"></i><a style="font-size: 50%" class="text-decoration-none" onclick="event.preventDefault(); document.getElementById('delete').submit();" href="{{route('posts.destroy', $post)}}">Delete</a>
+        </h1>
+        <form id="delete" action="{{route('posts.destroy', $post)}}" method="POST">
+            @method('DELETE')
+            @csrf
+        </form>
 
         <!-- Author -->
         <p class="lead">
             by
-            <a href="{{route('users.show', [Auth::user()])}}">{{Auth::user()->name}}</a>
+            <a href="{{route('users.show',$post->user)}}">{{$post->user->name}}</a>
         </p>
 
         <!-- Date/Time -->
