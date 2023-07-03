@@ -19,7 +19,7 @@ class PostController extends Controller
     {
         $user = Auth::user();
         if($user->hasAccess('Admin')){
-            $posts = Post::paginate(10);
+            $posts = Post::with('user')->paginate(10);
             return view('admin.posts.view', compact('posts'));
         }
         $posts = $user->posts()->paginate(10);
@@ -67,11 +67,11 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $user = Auth::user();
+        $post->load('user');
         if($user->hasAccess('Admin')){
             return view('admin.posts.show', compact('post'));
         }
         return view('user.posts.blog-post', compact('post')); 
-
     }
 
     /**
@@ -97,16 +97,20 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
         $this->authorize('update', $post);
-        $image = basename($request->image->store('public/images'));
-        $post->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $image
-        ]);
-        return redirect(route('posts.index'))->with('success', 'Post updated successfully !'); 
+        if($request->has('image')){
+            $image = basename($request->image->store('public/images'));
+            $post->image = $image;
+        }
+        $post->title = $request->title;
+        $post->description = $request->description;
+        if($post->isDirty()){
+            $post->save();
+            return redirect(route('posts.index'))->with('success', 'Post updated successfully !'); 
+        }
+        return redirect(route('posts.index'));
     }
 
     /**

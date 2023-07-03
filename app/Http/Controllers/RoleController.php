@@ -18,7 +18,7 @@ class RoleController extends Controller
     {
         $roles = Role::paginate(10);
         if(isset($_REQUEST['userid'])){
-            $user = User::find($_REQUEST['userid']);
+            $user = User::with('roles')->find($_REQUEST['userid']);
             return view('admin.user.roles', compact('roles', 'user'));
         }
         return view('admin.roles.view', compact('roles'));
@@ -82,7 +82,7 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         if(isset($_REQUEST['userid'])){
-            $user = User::find($_REQUEST['userid']);
+            $user = User::find($request->userid);
             if($request->has('attach')){
                 $user->roles()->attach($role);
                 return back()->with('success', 'Role Attached successfully !');

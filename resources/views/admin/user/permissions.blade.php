@@ -43,7 +43,7 @@
                         <form action="{{route('permissions.update', $permission)}}" method="POST">
                             @csrf
                             @method('PUT')
-                            <input type="hidden" value="{{$_REQUEST['userid']}}" name="userid">
+                            <input type="hidden" value="{{$user->id}}" name="userid">
                             <input type="submit" name="attach" @if ($user->permissions->contains($permission))
                             disabled
                             @endif value="Attach" class="btn btn-primary">

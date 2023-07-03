@@ -19,7 +19,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        $posts = Post::paginate(10);
+        $posts = Post::with('user')->paginate(10);
         return view('home', compact('posts'));
     }
 

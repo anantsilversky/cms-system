@@ -50,7 +50,7 @@
             @enderror
             <br>
             <h5>Password :</h5>
-            <input type="password" id="password" name="password" placeholder="Enter password" required class="form-control @error('password') is-invalid @enderror">
+            <input type="password" id="password" name="password" placeholder="Enter password" class="form-control @error('password') is-invalid @enderror">
             @error('password')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
             @enderror
             <br>
             <h5>Confirm Password :</h5>
-            <input type="password" id="password-confirm" required placeholder="Enter password" name="password_confirmation" class="form-control ">
+            <input type="password" id="password-confirm" placeholder="Enter password" name="password_confirmation" class="form-control ">
     
             <div class="card-footer text-muted text-center">
                 <button type="submit" class="btn btn-primary">Update</button>

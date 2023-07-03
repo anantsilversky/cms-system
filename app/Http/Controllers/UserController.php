@@ -86,15 +86,18 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $this->authorize('update', $user);
-        $image = basename($request->image->store('public/images'));
-        $user->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => $request->password,
-            'profile_image' => $image,
-            'age' => $request->age
-        ]);
+        if($request->has('image')){
+            $image = basename($request->image->store('public/images'));
+            $user->profile_image = $image;
+        }
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->age = $request->age;
+        if($request->filled('password')){
+            $user->password = $request->password;
+        }
+        $user->save();
         return redirect(route('users.show', $user))->with('success', 'Profile updated successfully !');
     }
 

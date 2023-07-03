@@ -13,7 +13,7 @@
         <!-- Author -->
         <p class="lead">
             by
-            <a href="{{route('users.show',$post->user)}}">{{$post->user->name}}</a>
+            <a href="{{route('users.show',$post->user)}}">{{$post->user['name']}}</a>
         </p>
 
         <!-- Date/Time -->

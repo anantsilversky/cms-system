@@ -18,7 +18,7 @@ class PermissionController extends Controller
     {
         $permissions = Permission::paginate(10);
         if(isset($_REQUEST['userid'])){
-            $user = User::find($_REQUEST['userid']);
+            $user = User::with('permissions')->find($_REQUEST['userid']);
             return view('admin.user.permissions', compact('permissions', 'user'));
         }
         return view('admin.permissions.view', compact('permissions'));
@@ -82,7 +82,7 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         if(isset($_REQUEST['userid'])){
-            $user = User::find($_REQUEST['userid']);
+            $user = User::find($request->userid);
             if($request->has('attach')){
                 $user->permissions()->attach($permission);
                 return back()->with('success', 'Permission Attached successfully !');

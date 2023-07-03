@@ -36,7 +36,7 @@
           @foreach($posts as $post)
             <tr>
               <td>{{$post->id}}</td>
-              <td>{{$post->user->name}}</td>
+              <td>{{$post->user['name']}}</td>
               <td><a href="{{route('posts.show', $post)}}">{{$post->title}}</a></td>
               <td>{{$post->description}}</td>
               <td><img src="{{asset('storage/images/'.$post->image)}}" alt="Image Unavailable" width="100%" height="100"></td>
